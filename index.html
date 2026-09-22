@@ -83,12 +83,17 @@
 
 <style>
 :root{
-  --ground:#0a1420; --ground-2:#0d1a29; --panel:#0f1e2e; --panel-2:#13273a;
-  --line:#1b3047; --line-bright:#2b4a69; --line-soft:#152738;
-  --ink:#eaf2fb; --ink-2:#9fb6cf; --ink-3:#647f9d;
-  --accent:#f27a2a; --accent-2:#ff9a4d; --accent-soft:rgba(242,122,42,.13);
-  --steel:#5f95cf;
-  --maxw:1160px; --r:6px;
+  --ground:#ffffff; --ground-2:#f3f7fd; --panel:#ffffff; --panel-2:#f6faff;
+  --line:#e7edf6; --line-bright:#d3deee; --line-soft:#eef3fa;
+  --ink:#0e1c30; --ink-2:#48607c; --ink-3:#8193ab;
+  --accent:#f27a2a; --accent-2:#b8540f; --accent-soft:rgba(242,122,42,.12);
+  --steel:#2563eb;
+  /* bright hi-tech hue set */
+  --h1:#2563eb; --h2:#0891b2; --h3:#3b82f6; --h4:#f27a2a; --h5:#db2777; --h6:#059669;
+  --btn-ink:#10233b;
+  --shadow:0 1px 2px rgba(15,30,55,.05), 0 8px 24px rgba(15,30,55,.07);
+  --shadow-lg:0 6px 16px rgba(15,30,55,.08), 0 20px 46px rgba(37,99,235,.12);
+  --maxw:1160px; --r:14px; --r-sm:10px;
   --f-display:'Saira','Rubik',system-ui,sans-serif;
   --f-body:'IBM Plex Sans','Heebo',system-ui,sans-serif;
   --f-mono:'IBM Plex Mono','Heebo',ui-monospace,monospace;
@@ -97,192 +102,201 @@
 html{scroll-behavior:smooth}
 body{
   margin:0;background-color:var(--ground);color:var(--ink);
-  background-image:radial-gradient(rgba(95,149,207,.055) 1px, transparent 1.4px);
-  background-size:24px 24px;background-position:-1px -1px;
+  background-image:
+    radial-gradient(120% 80% at 88% -8%, rgba(37,99,235,.08), transparent 60%),
+    radial-gradient(90% 70% at 0% 0%, rgba(6,182,212,.07), transparent 55%),
+    radial-gradient(rgba(37,99,235,.05) 1px, transparent 1.5px);
+  background-size:auto, auto, 26px 26px;
+  background-position:0 0, 0 0, -1px -1px;
+  background-attachment:fixed, fixed, scroll;
   font-family:var(--f-body);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
-h1,h2,h3,.display{font-family:var(--f-display);font-weight:600;line-height:1.06;text-wrap:balance;letter-spacing:-.015em}
+h1,h2,h3,.display{font-family:var(--f-display);font-weight:600;line-height:1.06;text-wrap:balance;letter-spacing:-.015em;color:var(--ink)}
 p{margin:0}
 a{color:inherit;text-decoration:none}
 img,svg{max-width:100%}
 .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:26px}
 .muted{color:var(--ink-2)}
-section{padding-block:92px;position:relative}
+section{padding-block:88px;position:relative}
 
-/* mono technical eyebrow + datasheet numbering */
-.eyebrow{font-family:var(--f-mono);text-transform:uppercase;letter-spacing:.16em;font-size:12px;font-weight:500;color:var(--accent-2);display:inline-flex;align-items:center;gap:12px}
+/* eyebrow as a bright pill badge */
+.eyebrow{font-family:var(--f-mono);text-transform:uppercase;letter-spacing:.12em;font-size:11.5px;font-weight:600;color:var(--h1);display:inline-flex;align-items:center;gap:9px;background:linear-gradient(120deg,rgba(37,99,235,.10),rgba(59,130,246,.12));border:1px solid rgba(37,99,235,.18);padding:6px 12px;border-radius:999px;width:fit-content}
 main{counter-reset:sec}
-.sec-head{max-width:680px;margin-bottom:46px;display:flex;flex-direction:column;gap:16px;position:relative}
-.sec-head > .eyebrow::before{counter-increment:sec;content:counter(sec,decimal-leading-zero);color:var(--accent);font-family:var(--f-mono);font-weight:600;padding-inline-end:12px;border-inline-end:1px solid var(--line-bright)}
-.sec-head > .eyebrow::after{content:"";height:1px;width:40px;background:var(--line-bright)}
-.sec-head h2{font-size:clamp(28px,4vw,43px);margin:0}
+.sec-head{max-width:700px;margin-bottom:44px;display:flex;flex-direction:column;gap:16px;position:relative}
+.sec-head h2{font-size:clamp(28px,4vw,44px);margin:0}
 .sec-head p{color:var(--ink-2);font-size:18px}
 
 /* logo */
 .logo{display:flex;align-items:center;gap:11px;font-family:var(--f-display);font-weight:700;letter-spacing:.01em;font-size:20px}
 .logo .glyph{width:34px;height:34px;flex:none}
 .logo .name{display:flex;flex-direction:column;line-height:1}
-.logo .name b span{color:var(--accent-2)}
-.logo .name small{font-weight:500;color:var(--ink-3);font-family:var(--f-mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;margin-top:4px}
+.logo .name b span{color:var(--accent)}
+.logo .name small{font-weight:600;color:var(--ink-3);font-family:var(--f-mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;margin-top:4px}
 
 /* nav */
-header.nav{position:sticky;top:0;z-index:50;background:rgba(10,20,32,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .nav-in{display:flex;align-items:center;gap:22px;height:66px}
 nav.links{margin-inline-start:auto;display:flex;gap:26px;align-items:center}
-nav.links a{font-family:var(--f-mono);font-size:12.5px;letter-spacing:.06em;color:var(--ink-2);transition:color .2s;text-transform:uppercase}
-nav.links a:hover{color:var(--accent-2)}
-.lang-btn{font-family:var(--f-mono);font-weight:500;font-size:12px;letter-spacing:.08em;color:var(--ink);background:transparent;border:1px solid var(--line-bright);padding:7px 12px;border-radius:var(--r);cursor:pointer;transition:all .2s}
-.lang-btn:hover{border-color:var(--accent);color:var(--accent-2)}
-.nav-cta{display:inline-flex;padding:8px 14px;border-radius:var(--r);background:var(--accent);color:#0a1420!important;font-weight:600;font-size:12.5px;letter-spacing:.04em}
+nav.links a{font-family:var(--f-mono);font-size:12.5px;letter-spacing:.05em;color:var(--ink-2);transition:color .2s;text-transform:uppercase;font-weight:500}
+nav.links a:hover{color:var(--h1)}
+.lang-btn{font-family:var(--f-mono);font-weight:600;font-size:11.5px;letter-spacing:.04em;color:var(--ink);background:#fff;border:1px solid var(--line-bright);padding:5px 10px;border-radius:999px;cursor:pointer;transition:all .2s}
+.lang-btn:hover{border-color:var(--h1);color:var(--h1)}
+.nav-cta{display:inline-flex;padding:9px 16px;border-radius:999px;background:linear-gradient(120deg,var(--accent),#ff9a4d);color:#fff!important;font-weight:700;font-size:12.5px;letter-spacing:.03em;box-shadow:0 6px 16px rgba(242,122,42,.28)}
 @media(max-width:860px){nav.links{display:none}}
 
 /* status strip */
-.statusbar{border-bottom:1px solid var(--line);background:var(--ground-2)}
-.statusbar-in{display:flex;align-items:center;gap:22px;height:34px;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;color:var(--ink-3);text-transform:uppercase;overflow:hidden}
-.sb-brand{color:var(--accent-2);flex:none}
-.sb-domains{margin-inline:auto;color:var(--steel);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sb-loc{flex:none}
+.statusbar{border-bottom:1px solid var(--line);background:linear-gradient(90deg,rgba(37,99,235,.05),rgba(59,130,246,.05))}
+.statusbar-in{display:flex;align-items:center;gap:22px;height:34px;font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;color:var(--ink-3);text-transform:uppercase;overflow:hidden}
+.sb-brand{color:var(--accent-2);flex:none;font-weight:600}
+.sb-domains{margin-inline:auto;color:var(--h1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500}
+.sb-loc{flex:none;color:var(--h3);font-weight:600}
 @media(max-width:760px){.sb-domains,.sb-loc{display:none}}
 
 /* buttons */
-.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 22px;border-radius:var(--r);font-family:var(--f-mono);font-weight:500;font-size:13.5px;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:transform .15s,box-shadow .2s,background .2s,border-color .2s;border:1px solid transparent}
-.btn.primary{background:var(--accent);color:#0a1420;box-shadow:0 8px 24px rgba(242,122,42,.22)}
-.btn.primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(242,122,42,.34)}
-.btn.ghost{background:transparent;border-color:var(--line-bright);color:var(--ink)}
-.btn.ghost:hover{border-color:var(--accent);color:var(--accent-2)}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 24px;border-radius:999px;font-family:var(--f-mono);font-weight:600;font-size:13px;letter-spacing:.03em;text-transform:uppercase;cursor:pointer;transition:transform .15s,box-shadow .2s,background .2s,border-color .2s,color .2s;border:1px solid transparent}
+.btn.primary{background:linear-gradient(120deg,var(--accent),#ff9a4d);color:#fff;box-shadow:0 10px 26px rgba(242,122,42,.28)}
+.btn.primary:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(242,122,42,.4)}
+.btn.ghost{background:#fff;border-color:var(--line-bright);color:var(--ink)}
+.btn.ghost:hover{border-color:var(--h1);color:var(--h1);transform:translateY(-2px);box-shadow:var(--shadow)}
 
 /* hero */
-.hero{position:relative;padding-top:66px;padding-bottom:60px;overflow:hidden;border-bottom:1px solid var(--line)}
-#net{position:absolute;inset:0;width:100%;height:100%;opacity:.5}
-.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 86% 8%,rgba(242,122,42,.10),transparent 55%),linear-gradient(180deg,transparent 45%,var(--ground) 98%);pointer-events:none}
-.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:.16;filter:grayscale(.15) contrast(1.05);-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.9),rgba(0,0,0,.35) 55%,transparent);mask-image:linear-gradient(180deg,rgba(0,0,0,.9),rgba(0,0,0,.35) 55%,transparent);pointer-events:none}
+.hero{position:relative;padding-top:70px;padding-bottom:74px;overflow:hidden;border-bottom:1px solid var(--line)}
+#net{position:absolute;inset:0;width:100%;height:100%;opacity:.55}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(70% 60% at 84% 6%,rgba(242,122,42,.12),transparent 60%),radial-gradient(60% 55% at 10% 90%,rgba(6,182,212,.10),transparent 60%);pointer-events:none}
+.hero-bg{display:none!important}
 .hero-in{position:relative;z-index:2}
-.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+.hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:48px;align-items:center}
 .hero-copy{display:flex;flex-direction:column;gap:22px}
 .hero h1{font-size:clamp(33px,5.4vw,60px);font-weight:700;margin:0}
-.hero .lead{font-size:clamp(17px,2.1vw,20px);color:var(--ink-2);max-width:58ch}
+.hero h1 .grad{background:linear-gradient(110deg,var(--h1),var(--h3) 55%,var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .lead{font-size:clamp(17px,2.1vw,20px);color:var(--ink-2);max-width:60ch}
 .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:6px}
 .hero-visual{display:flex;justify-content:center;position:relative}
-.hero-visual svg{width:100%;max-width:420px;height:auto;filter:drop-shadow(0 18px 40px rgba(0,0,0,.45))}
-@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:34px}.hero-visual{order:-1;max-width:360px;margin-inline:auto}}
+.hero-visual svg{width:100%;max-width:430px;height:auto;filter:drop-shadow(0 24px 50px rgba(37,99,235,.22))}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:34px}.hero-visual{order:-1;max-width:340px;margin-inline:auto}}
 
-/* instrument stats */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:52px;background:var(--panel)}
-.stat{padding:24px 22px;display:flex;flex-direction:column;gap:8px;border-inline-start:1px solid var(--line);position:relative}
-.stat:first-child{border-inline-start:0}
-.stat::before{content:"";position:absolute;inset-block-start:0;inset-inline-start:0;width:0;height:2px;background:var(--accent);transition:width .3s}
-.stat:hover::before{width:100%}
-.stat .n{font-family:var(--f-mono);font-weight:600;font-size:36px;color:var(--accent-2);font-variant-numeric:tabular-nums;line-height:1;letter-spacing:-.02em}
-.stat .l{font-size:12.5px;color:var(--ink-2);line-height:1.4;font-family:var(--f-mono);letter-spacing:.02em}
-@media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}.stat:nth-child(3){border-inline-start:0}}
+/* stats (unused/hidden if present) */
+.stats{display:none}
 
 /* gateway infographic */
 .gateway{display:grid;grid-template-columns:1fr auto 1.25fr auto 1fr;align-items:stretch;gap:14px}
-.stage{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:22px 20px;display:flex;flex-direction:column;gap:10px}
-.stage.mid{background:linear-gradient(160deg,var(--panel-2),#123049);border-color:var(--accent);position:relative}
-.stage.mid::before,.stage.mid::after,.contact-cta::before,.contact-cta::after{content:"";position:absolute;width:12px;height:12px;border:1.5px solid var(--accent);opacity:.8;pointer-events:none}
-.stage.mid::before,.contact-cta::before{inset-block-start:-1px;inset-inline-start:-1px;border-inline-end:0;border-block-end:0}
-.stage.mid::after,.contact-cta::after{inset-block-end:-1px;inset-inline-end:-1px;border-inline-start:0;border-block-start:0}
-.stage .cap{font-family:var(--f-mono);text-transform:uppercase;letter-spacing:.14em;font-size:11px;color:var(--ink-3)}
-.stage.mid .cap{color:var(--accent-2)}
+.stage{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:24px 22px;display:flex;flex-direction:column;gap:10px;box-shadow:var(--shadow)}
+.stage.mid{background:linear-gradient(150deg,var(--h1),var(--h3));border:0;color:#fff;box-shadow:0 18px 40px rgba(37,99,235,.28);position:relative}
+.stage .cap{font-family:var(--f-mono);text-transform:uppercase;letter-spacing:.13em;font-size:11px;color:var(--ink-3);font-weight:600}
+.stage.mid .cap{color:rgba(255,255,255,.9)}
 .stage h3{font-size:19px;margin:0}
-.stage ul{margin:2px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px}
-.stage li{font-size:14px;color:var(--ink-2);display:flex;gap:9px;align-items:flex-start}
-.stage li::before{content:"";flex:none;width:6px;height:6px;background:var(--accent);margin-top:7px}
+.stage.mid h3{color:#fff}
+.stage ul{margin:2px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.stage li{font-size:14px;color:rgba(255,255,255,.94);display:flex;gap:9px;align-items:flex-start}
+.stage li::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:#fff;margin-top:6px;opacity:.9}
 .stage p{font-size:14px;color:var(--ink-2)}
-.flowarrow{display:flex;align-items:center;justify-content:center;color:var(--accent-2)}
-.flowarrow svg{width:28px;height:28px}
+.flowarrow{display:flex;align-items:center;justify-content:center;color:var(--h1)}
+.flowarrow svg{width:30px;height:30px}
 [dir="rtl"] .flowarrow svg{transform:scaleX(-1)}
 @media(max-width:900px){.gateway{grid-template-columns:1fr}.flowarrow{transform:rotate(90deg)}[dir="rtl"] .flowarrow svg{transform:none}}
 
 /* cards */
-.grid{display:grid;gap:16px;counter-reset:item}
-.g4{grid-template-columns:repeat(2,1fr)}
+.grid{display:grid;gap:18px}
+.g4{grid-template-columns:repeat(3,1fr)}
 .g3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:960px){.g4{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:820px){.g3{grid-template-columns:1fr}}
-.foundedby{margin-top:34px;padding-top:20px;border-top:1px solid var(--line);color:var(--ink-3);font-family:var(--f-mono);letter-spacing:.06em;font-size:13px;text-transform:uppercase}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:26px 24px;display:flex;flex-direction:column;gap:11px;position:relative;transition:border-color .2s,background .2s}
-.card::after{content:"";position:absolute;inset-block-start:-1px;inset-inline-start:22px;width:34px;height:2px;background:var(--line-bright);transition:background .2s}
-.card:hover{border-color:var(--accent);background:var(--panel-2)}
-.card:hover::after{background:var(--accent)}
-.card > .ix{position:absolute;inset-block-start:22px;inset-inline-end:22px;font-family:var(--f-mono);font-size:11px;color:var(--ink-3);letter-spacing:.1em}
-.card::before{counter-increment:item;content:counter(item,decimal-leading-zero);position:absolute;inset-block-start:24px;inset-inline-end:22px;font-family:var(--f-mono);font-size:11px;color:var(--ink-3);letter-spacing:.12em}
-.card .ic{width:40px;height:40px;border-radius:var(--r);background:var(--accent-soft);display:grid;place-items:center;color:var(--accent-2);border:1px solid var(--line-bright)}
-.card .ic svg{width:21px;height:21px}
+@media(max-width:640px){.g4{grid-template-columns:1fr}}
+.card{--ca:var(--accent);background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:26px 24px;display:flex;flex-direction:column;gap:11px;position:relative;overflow:hidden;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s}
+.card::before{content:"";position:absolute;inset-block-start:0;inset-inline-start:0;inset-inline-end:0;height:4px;background:linear-gradient(90deg,var(--ca),transparent 85%)}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.card .ic{width:46px;height:46px;border-radius:12px;background:color-mix(in srgb, var(--ca) 14%, #fff);display:grid;place-items:center;color:var(--ca);border:1px solid color-mix(in srgb, var(--ca) 26%, #fff)}
+.card .ic svg{width:23px;height:23px}
 .card h3{font-size:19px;margin:0}
 .card p{color:var(--ink-2);font-size:15px}
-@media(max-width:720px){.g4{grid-template-columns:1fr}}
+/* colorful rotation */
+.g4 .card:nth-child(1){--ca:var(--h1)} .g4 .card:nth-child(2){--ca:var(--h2)} .g4 .card:nth-child(3){--ca:var(--h3)}
+.g4 .card:nth-child(4){--ca:var(--h4)} .g4 .card:nth-child(5){--ca:var(--h5)} .g4 .card:nth-child(6){--ca:var(--h6)}
+.g3 .card:nth-child(1){--ca:var(--h1)} .g3 .card:nth-child(2){--ca:var(--h4)} .g3 .card:nth-child(3){--ca:var(--h6)}
+.foundedby{margin-top:34px;padding-top:20px;border-top:1px solid var(--line);color:var(--ink-3);font-family:var(--f-mono);letter-spacing:.05em;font-size:13px;text-transform:uppercase}
+.foundedby::before{content:"// ";color:var(--accent)}
 
 /* advantage */
 .adv{background:var(--ground-2);border-block:1px solid var(--line)}
 .adv-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:54px;align-items:center}
-.adv-points{display:flex;flex-direction:column;gap:20px}
-.adv-point{display:flex;gap:16px;align-items:flex-start}
-.adv-point .dot{flex:none;margin-top:6px;width:10px;height:10px;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
-.adv-point h4{font-family:var(--f-mono);font-size:14px;text-transform:uppercase;letter-spacing:.06em;margin:0 0 5px;color:var(--ink)}
+.adv-points{display:flex;flex-direction:column;gap:14px}
+.adv-point{display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:var(--r-sm);padding:18px 20px;box-shadow:var(--shadow)}
+.adv-point .dot{flex:none;margin-top:6px;width:12px;height:12px;border-radius:50%;background:var(--h1);box-shadow:0 0 0 5px color-mix(in srgb,var(--h1) 16%, #fff)}
+.adv-point:nth-child(2) .dot{background:var(--h4);box-shadow:0 0 0 5px color-mix(in srgb,var(--h4) 16%, #fff)}
+.adv-point:nth-child(3) .dot{background:var(--h6);box-shadow:0 0 0 5px color-mix(in srgb,var(--h6) 16%, #fff)}
+.adv-point h4{font-family:var(--f-mono);font-size:13.5px;text-transform:uppercase;letter-spacing:.05em;margin:0 0 5px;color:var(--ink)}
 .adv-point p{color:var(--ink-2);font-size:15px;margin:0}
 @media(max-width:820px){.adv-grid{grid-template-columns:1fr;gap:34px}}
 
-/* about pillars use cards */
-.foundedby::before{content:"// ";color:var(--accent)}
-
-/* expertise chips as component tags */
-.chips{display:flex;flex-wrap:wrap;gap:10px}
-.chip{display:inline-flex;align-items:center;gap:9px;padding:10px 15px;border-radius:var(--r);background:var(--panel);border:1px solid var(--line);font-family:var(--f-mono);font-weight:500;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;transition:border-color .2s,color .2s}
-.chip:hover{border-color:var(--accent);color:var(--accent-2)}
-.chip svg{width:17px;height:17px;color:var(--steel);flex:none}
-.chip:hover svg{color:var(--accent)}
+/* expertise chips */
+.chips{display:flex;flex-wrap:wrap;gap:11px}
+.chip{display:inline-flex;align-items:center;gap:9px;padding:11px 16px;border-radius:999px;background:#fff;border:1px solid var(--line-bright);font-family:var(--f-mono);font-weight:500;font-size:12.5px;letter-spacing:.03em;text-transform:uppercase;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s,border-color .2s,color .2s}
+.chip:hover{border-color:var(--h1);color:var(--h1);transform:translateY(-2px)}
+.chip svg{width:17px;height:17px;color:var(--h1);flex:none}
+.chip:nth-child(2) svg{color:var(--h2)} .chip:nth-child(3) svg{color:var(--h3)} .chip:nth-child(4) svg{color:var(--h4)}
+.chip:nth-child(5) svg{color:var(--h5)} .chip:nth-child(6) svg{color:var(--h6)} .chip:nth-child(7) svg{color:var(--h1)}
+.chip:nth-child(8) svg{color:var(--h2)} .chip:nth-child(9) svg{color:var(--h3)} .chip:nth-child(10) svg{color:var(--h4)}
 
 /* ladder */
 .ladder-wrap{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
 .ladder{display:flex;flex-direction:column;gap:14px}
-.rung{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;display:flex;gap:20px;align-items:flex-start;position:relative;overflow:hidden}
-.rung::before{content:"";position:absolute;inset-block:0;inset-inline-start:0;width:2px;background:var(--accent)}
-.rung .num{font-family:var(--f-mono);font-weight:600;font-size:22px;color:var(--accent);letter-spacing:0;flex:none;width:36px}
+.rung{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;display:flex;gap:20px;align-items:flex-start;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.rung::before{content:"";position:absolute;inset-block:0;inset-inline-start:0;width:5px;background:var(--h1)}
+.rung:nth-child(2)::before{background:var(--h2)}
+.rung:nth-child(3)::before{background:var(--accent)}
+.rung .num{font-family:var(--f-mono);font-weight:700;font-size:22px;color:var(--h1);letter-spacing:0;flex:none;width:36px}
+.rung:nth-child(2) .num{color:var(--h2)}
+.rung:nth-child(3) .num{color:var(--accent)}
 .rung h3{font-size:18px;margin:0 0 4px}
 .rung p{color:var(--ink-2);font-size:14.5px;margin:0}
-.ladder-svg svg{width:100%;height:auto}
+.ladder-svg svg{width:100%;height:auto;filter:drop-shadow(0 16px 34px rgba(37,99,235,.16))}
 @media(max-width:820px){.ladder-wrap{grid-template-columns:1fr;gap:30px}.ladder-svg{order:-1;max-width:440px;margin-inline:auto}}
 
 /* electronica band */
-.band{background:linear-gradient(140deg,#0f2032,#0c1a29);border-block:1px solid var(--line)}
-.band-in{display:flex;align-items:center;justify-content:space-between;gap:36px;flex-wrap:wrap}
-.band-txt{max-width:650px;display:flex;flex-direction:column;gap:14px}
-.band-txt h2{font-size:clamp(26px,3.6vw,38px);margin:0}
-.band .when{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-mono);font-weight:500;color:var(--accent-2);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.band{background:linear-gradient(130deg,var(--h3),var(--h1) 55%,var(--h2));border:0;position:relative;overflow:hidden}
+.band::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 120% at 90% 10%,rgba(242,122,42,.35),transparent 60%);pointer-events:none}
+.band-in{display:flex;align-items:center;justify-content:space-between;gap:36px;flex-wrap:wrap;position:relative;z-index:1}
+.band-txt{max-width:660px;display:flex;flex-direction:column;gap:14px}
+.band-txt h2{font-size:clamp(26px,3.6vw,38px);margin:0;color:#fff}
+.band-txt .muted{color:rgba(255,255,255,.9)}
+.band .when{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-mono);font-weight:600;color:#fff;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.band .btn.primary{background:#fff;color:var(--h1);box-shadow:0 12px 30px rgba(0,0,0,.18)}
+.band .btn.primary:hover{background:#fff;color:var(--h3)}
 
 /* contact */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
-.cinfo{display:flex;flex-direction:column}
-.cline{display:flex;gap:14px;align-items:baseline;padding-block:15px;border-bottom:1px solid var(--line)}
-.cline .k{font-family:var(--f-mono);text-transform:uppercase;letter-spacing:.12em;font-size:11px;color:var(--ink-3);width:100px;flex:none}
+.cinfo{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:8px 24px;box-shadow:var(--shadow)}
+.cline{display:flex;gap:14px;align-items:baseline;padding-block:16px;border-bottom:1px solid var(--line)}
+.cline:last-child{border-bottom:0}
+.cline .k{font-family:var(--f-mono);text-transform:uppercase;letter-spacing:.1em;font-size:11px;color:var(--ink-3);width:100px;flex:none;font-weight:600}
 .cline .v{color:var(--ink);font-size:16px}
-.cline a.v:hover{color:var(--accent-2)}
-.contact-cta{background:var(--panel);border:1px solid var(--accent);border-radius:var(--r);padding:34px;display:flex;flex-direction:column;gap:18px;justify-content:center;position:relative}
+.cline a.v{color:var(--h1)}
+.cline a.v:hover{color:var(--h3)}
+.contact-cta{background:linear-gradient(150deg,#fff,var(--panel-2));border:1px solid var(--line-bright);border-radius:var(--r);padding:34px;display:flex;flex-direction:column;gap:18px;justify-content:center;position:relative;box-shadow:var(--shadow-lg)}
 .contact-cta h3{font-size:22px;margin:0}
 .contact-cta p{color:var(--ink-2);font-size:15px;margin:0}
 @media(max-width:820px){.contact-grid{grid-template-columns:1fr;gap:26px}}
 
-footer{border-top:1px solid var(--line);padding-block:30px;color:var(--ink-3);font-size:12.5px;font-family:var(--f-mono);letter-spacing:.04em}
+footer{border-top:1px solid var(--line);padding-block:30px;color:var(--ink-3);font-size:12.5px;font-family:var(--f-mono);letter-spacing:.03em;background:var(--ground-2)}
 .foot-in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
-.foot-tag{text-transform:uppercase;font-size:11px;color:var(--ink-3);letter-spacing:.08em}
+.foot-tag{text-transform:uppercase;font-size:11px;color:var(--ink-3);letter-spacing:.06em}
 
 [dir="rtl"] .eyebrow,[dir="rtl"] .foot-tag,[dir="rtl"] .cline .k,[dir="rtl"] .chip,[dir="rtl"] nav.links a,[dir="rtl"] .stage .cap,[dir="rtl"] .adv-point h4,[dir="rtl"] .btn,[dir="rtl"] .statusbar-in{letter-spacing:0}
-:focus-visible{outline:2px solid var(--accent-2);outline-offset:3px;border-radius:2px}
+:focus-visible{outline:2px solid var(--h1);outline-offset:3px;border-radius:3px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
 
 /* capabilities gallery */
-.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 @media(max-width:900px){.gallery-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.gallery-grid{grid-template-columns:1fr}}
-.gtile{margin:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--panel);transition:border-color .2s,transform .2s}
-.gtile:hover{border-color:var(--accent);transform:translateY(-3px)}
-.gart{aspect-ratio:4/3;background:#0c1a29;border-bottom:1px solid var(--line)}
+.gtile{margin:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:#fff;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s}
+.gtile:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.gart{aspect-ratio:4/3;background:var(--panel-2);border-bottom:1px solid var(--line)}
 .gart svg{width:100%;height:100%;display:block}
-.gart img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.92) contrast(1.02)}
-.gtile:hover .gart img{filter:saturate(1) contrast(1.04)}
-.gtile figcaption{display:flex;align-items:center;gap:11px;padding:13px 16px;font-family:var(--f-mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em}
-.gt-i{color:var(--accent);font-weight:600}
+.gart img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.02) contrast(1.02)}
+.gtile:hover .gart img{filter:saturate(1.08) contrast(1.04)}
+.gtile figcaption{display:flex;align-items:center;gap:11px;padding:14px 16px;font-family:var(--f-mono);font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+.gt-i{color:var(--accent);font-weight:700}
 .gt-t{color:var(--ink-2)}
 [dir="rtl"] .gtile figcaption{letter-spacing:0}
 
@@ -307,13 +321,12 @@ footer{border-top:1px solid var(--line);padding-block:30px;color:var(--ink-3);fo
       <a href="#expertise" data-en="Expertise" data-he="תחומים">Expertise</a>
       <a href="#electronica" class="nav-cta">electronica 2026</a>
     </nav>
-    <button class="lang-btn" id="langBtn" type="button" aria-label="Switch language">עברית</button>
+    <button class="lang-btn" id="langBtn" type="button" aria-label="Switch language">עב</button>
   </div>
 </header>
 
 <div class="statusbar">
   <div class="wrap statusbar-in">
-    <span class="sb-brand">// HADTECH</span>
     <span class="sb-domains">PASSIVE / ACTIVE / SYSTEMS / HIGH-SPEED / RF / COMMS / MEDICAL / DEFENSE</span>
     <span class="sb-loc">ISRAEL</span>
   </div>
@@ -328,7 +341,7 @@ footer{border-top:1px solid var(--line);padding-block:30px;color:var(--ink-3);fo
       <div class="hero-grid">
         <div class="hero-copy">
           <span class="eyebrow" data-en="Representation | Engineering | Manufacturing" data-he="נציגות | הנדסה | ייצור">Representation | Engineering | Manufacturing</span>
-          <h1 data-en="Components, systems and engineering for advanced electronics." data-he="רכיבים, מערכות והנדסה לאלקטרוניקה מתקדמת.">Components, systems and engineering for advanced electronics.</h1>
+          <h1 data-en="Systems and engineering for advanced electronics" data-he="מערכות והנדסה לאלקטרוניקה מתקדמת">Systems and engineering for advanced electronics</h1>
           <p class="lead" data-en="HadTech represents manufacturers of passive and active components and complete systems, and delivers design, test and manufacturing services across communications, medical and defense: high-speed circuits, electro-mechanical integration, final-test definition and design for manufacturability that lowers cost." data-he="HadTech מייצגת יצרני רכיבים פסיביים ואקטיביים ומערכות שלמות, ומספקת שירותי פיתוח, תכנון, בדיקה וייצור בתחומי התקשורת, הרפואה והביטחון: מעגלים במהירות גבוהה, אינטגרציה אלקטרו-מכנית, הגדרת בדיקות סופיות ותכנון לייצוריות שמפחית עלויות.">HadTech represents manufacturers of passive and active components and complete systems, and delivers design, test and manufacturing services across communications, medical and defense: high-speed circuits, electro-mechanical integration, final-test definition and design for manufacturability that lowers cost.</p>
           <div class="cta-row">
             <a class="btn primary" href="#electronica" data-en="Meet us at electronica 2026" data-he="נפגשים ב-electronica 2026">Meet us at electronica 2026</a>
@@ -337,19 +350,19 @@ footer{border-top:1px solid var(--line);padding-block:30px;color:var(--ink-3);fo
         </div>
         <div class="hero-visual" aria-hidden="true">
           <svg viewBox="0 0 440 400" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
-            <rect x="16" y="16" width="408" height="368" rx="20" fill="#0f1c2c" stroke="#243b57" stroke-width="1.5"/>
+            <rect x="16" y="16" width="408" height="368" rx="20" fill="#f5f9ff" stroke="#d3deee" stroke-width="1.5"/>
             <g stroke="#2c476a" stroke-width="1.4">
               <path d="M70 120h70M70 120v-44h60M300 120h70M370 120v-44h-60M70 280h70M70 280v44h60M300 280h70M370 280v44h-60"/>
             </g>
-            <g fill="#5b8fc7">
+            <g fill="#2563eb">
               <circle cx="70" cy="76" r="4"/><circle cx="370" cy="76" r="4"/><circle cx="70" cy="324" r="4"/><circle cx="370" cy="324" r="4"/>
             </g>
-            <text x="70" y="64" fill="#8ca3be" font-family="Saira, sans-serif" font-size="10.5" letter-spacing="1.2" text-anchor="middle">COMPONENTS</text>
-            <text x="370" y="64" fill="#8ca3be" font-family="Saira, sans-serif" font-size="12" letter-spacing="1.2" text-anchor="middle">SYSTEMS</text>
-            <text x="70" y="346" fill="#8ca3be" font-family="Saira, sans-serif" font-size="12" letter-spacing="1.2" text-anchor="middle">DESIGN</text>
-            <text x="370" y="346" fill="#8ca3be" font-family="Saira, sans-serif" font-size="12" letter-spacing="1.2" text-anchor="middle">TEST</text>
+            <text x="70" y="64" fill="#48607c" font-family="Saira, sans-serif" font-size="10.5" letter-spacing="1.2" text-anchor="middle">COMPONENTS</text>
+            <text x="370" y="64" fill="#48607c" font-family="Saira, sans-serif" font-size="12" letter-spacing="1.2" text-anchor="middle">SYSTEMS</text>
+            <text x="70" y="346" fill="#48607c" font-family="Saira, sans-serif" font-size="12" letter-spacing="1.2" text-anchor="middle">DESIGN</text>
+            <text x="370" y="346" fill="#48607c" font-family="Saira, sans-serif" font-size="12" letter-spacing="1.2" text-anchor="middle">TEST</text>
             <!-- chip pins -->
-            <g stroke="#2c476a" fill="#1c3049">
+            <g stroke="#93aede" fill="#cdd9ee">
               <rect x="140" y="150" width="10" height="14" rx="2"/><rect x="140" y="176" width="10" height="14" rx="2"/><rect x="140" y="202" width="10" height="14" rx="2"/><rect x="140" y="228" width="10" height="14" rx="2"/>
               <rect x="290" y="150" width="10" height="14" rx="2"/><rect x="290" y="176" width="10" height="14" rx="2"/><rect x="290" y="202" width="10" height="14" rx="2"/><rect x="290" y="228" width="10" height="14" rx="2"/>
               <rect x="176" y="118" width="14" height="10" rx="2"/><rect x="213" y="118" width="14" height="10" rx="2"/><rect x="250" y="118" width="14" height="10" rx="2"/>
@@ -357,12 +370,12 @@ footer{border-top:1px solid var(--line);padding-block:30px;color:var(--ink-3);fo
             </g>
             <!-- chip body -->
             <rect x="150" y="130" width="140" height="132" rx="14" fill="url(#chip)" stroke="#e8762a" stroke-width="1.8"/>
-            <rect x="176" y="158" width="88" height="76" rx="8" fill="#16324e" stroke="#5b8fc7" stroke-width="1.2"/>
-            <text x="220" y="204" fill="#f2934f" font-family="Saira, sans-serif" font-weight="700" font-size="30" letter-spacing="1" text-anchor="middle">HT</text>
+            <rect x="176" y="158" width="88" height="76" rx="8" fill="#1e3a8a" stroke="#bcd0ff" stroke-width="1.2"/>
+            <text x="220" y="204" fill="#ffd29e" font-family="Saira, sans-serif" font-weight="700" font-size="30" letter-spacing="1" text-anchor="middle">HT</text>
             <circle cx="220" cy="196" r="52" stroke="#e8762a" stroke-width="1" stroke-opacity="0.28" fill="none"/>
             <defs>
               <linearGradient id="chip" x1="150" y1="130" x2="290" y2="262" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#18304a"/><stop offset="1" stop-color="#122238"/>
+                <stop stop-color="#2563eb"/><stop offset="1" stop-color="#3b82f6"/>
               </linearGradient>
             </defs>
           </svg>
@@ -492,10 +505,10 @@ footer{border-top:1px solid var(--line);padding-block:30px;color:var(--ink-3);fo
       <div class="sec-head" style="margin-bottom:0">
         <span class="eyebrow" data-en="The advantage" data-he="היתרון">The advantage</span>
         <h2 data-en="An operator, not an agent." data-he="מפעיל, לא סוכן.">An operator, not an agent.</h2>
-        <p data-en="Most representatives hand you a contact list. HadTech brings a former CEO who reads your BOM, yield, sourcing, DFM and working capital, and knows how to turn a technology into qualified revenue in a demanding market." data-he="רוב הנציגים נותנים לכם רשימת אנשי קשר. HadTech מביאה מנכ&quot;ל לשעבר שקורא את ה-BOM, ה-yield, ה-sourcing, ה-DFM וההון החוזר שלכם, ויודע להפוך טכנולוגיה להכנסה מוסמכת בשוק תובעני.">Most representatives hand you a contact list. HadTech brings a former CEO who reads your BOM, yield, sourcing, DFM and working capital, and knows how to turn a technology into qualified revenue in a demanding market.</p>
+        <p data-en="Most representatives hand you a contact list. HadTech brings operator-level command of your BOM, yield, sourcing, DFM and working capital, and knows how to turn a technology into qualified revenue in a demanding market." data-he="רוב הנציגים נותנים לכם רשימת אנשי קשר. HadTech מביאה שליטה תפעולית מלאה ב-BOM, ב-yield, ב-sourcing, ב-DFM ובהון החוזר שלכם, ויודעת להפוך טכנולוגיה להכנסה מוסמכת בשוק תובעני.">Most representatives hand you a contact list. HadTech brings operator-level command of your BOM, yield, sourcing, DFM and working capital, and knows how to turn a technology into qualified revenue in a demanding market.</p>
       </div>
       <div class="adv-points">
-        <div class="adv-point"><span class="dot"></span><div><h4 data-en="Executive depth" data-he="עומק ניהולי">Executive depth</h4><p data-en="More than 25 years of P and L, turnaround and M and A, including public company (TASE) governance and board leadership." data-he="יותר מ-25 שנות ניהול P&amp;L, הבראה ו-M&amp;A, כולל ממשל תאגידי בחברה ציבורית (TASE) והובלת דירקטוריון.">More than 25 years of P and L, turnaround and M and A, including public company (TASE) governance and board leadership.</p></div></div>
+        <div class="adv-point"><span class="dot"></span><div><h4 data-en="Operational depth" data-he="עומק תפעולי">Operational depth</h4><p data-en="Commercial and operational depth: P and L discipline, sourcing, DFM and working capital brought to every engagement, so representation runs like a business." data-he="עומק מסחרי ותפעולי: משמעת P&amp;L, sourcing, DFM וניהול הון חוזר בכל התקשרות, כך שהנציגות מתנהלת כמו עסק.">Commercial and operational depth: P and L discipline, sourcing, DFM and working capital brought to every engagement, so representation runs like a business.</p></div></div>
         <div class="adv-point"><span class="dot"></span><div><h4 data-en="Engineering fluency" data-he="שטף הנדסי">Engineering fluency</h4><p data-en="Hardware, NPI, SMT and reliability, from prototype to mass production. A partner who speaks your engineers' language." data-he="חומרה, NPI, SMT ואמינות, מאב-טיפוס לייצור המוני. שותף שמדבר בשפת המהנדסים שלכם.">Hardware, NPI, SMT and reliability, from prototype to mass production. A partner who speaks your engineers' language.</p></div></div>
         <div class="adv-point"><span class="dot"></span><div><h4 data-en="Real access" data-he="גישה אמיתית">Real access</h4><p data-en="Direct working relationships with Israel's defense primes, integrators and industrial and medical OEMs." data-he="קשרי עבודה ישירים עם יצרניות הביטחון, האינטגרטורים ולקוחות התעשייה והרפואה בישראל.">Direct working relationships with Israel's defense primes, integrators and industrial and medical OEMs.</p></div></div>
       </div>
@@ -508,23 +521,23 @@ footer{border-top:1px solid var(--line);padding-block:30px;color:var(--ink-3);fo
       <div class="sec-head">
         <span class="eyebrow" data-en="The foundation" data-he="הבסיס">The foundation</span>
         <h2 data-en="A firm built on two decades in electronics" data-he="חברה שנבנתה על שני עשורים באלקטרוניקה">A firm built on two decades in electronics</h2>
-        <p data-en="HadTech is a technology representation and commercialization firm. Its work rests on more than 25 years of executive leadership in advanced electronics and manufacturing, and on direct, working relationships across Israel's defense, industrial and medical industry." data-he="HadTech היא חברת נציגות ומסחור טכנולוגי. הפעילות שלה נשענת על יותר מ-25 שנות ניהול בכיר באלקטרוניקה ובייצור מתקדם, ועל קשרי עבודה ישירים בתעשיית הביטחון, התעשייה והרפואה בישראל.">HadTech is a technology representation and commercialization firm. Its work rests on more than 25 years of executive leadership in advanced electronics and manufacturing, and on direct, working relationships across Israel's defense, industrial and medical industry.</p>
+        <p data-en="HadTech is a technology representation and commercialization firm. Its work rests on decades of hands-on leadership in advanced electronics and manufacturing, and on direct, working relationships across Israel's defense, industrial and medical industry." data-he="HadTech היא חברת נציגות ומסחור טכנולוגי. הפעילות שלה נשענת על עשורים של ניהול מעשי באלקטרוניקה ובייצור מתקדם, ועל קשרי עבודה ישירים בתעשיית הביטחון, התעשייה והרפואה בישראל.">HadTech is a technology representation and commercialization firm. Its work rests on decades of hands-on leadership in advanced electronics and manufacturing, and on direct, working relationships across Israel's defense, industrial and medical industry.</p>
       </div>
       <div class="grid g3">
         <div class="card">
           <div class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V13M9 20V8M15 20V11M20 20V5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-          <h3 data-en="Leadership" data-he="ניהול">Leadership</h3>
-          <p data-en="CEO and P and L experience, a turnaround of a 70 person manufacturer from receivership to a successful exit, and public company (TASE) governance." data-he="ניסיון CEO ו-P&amp;L, הבראת יצרן בן 70 עובדים מכינוס נכסים לאקזיט מוצלח, וממשל תאגידי בחברה ציבורית (TASE).">CEO and P and L experience, a turnaround of a 70 person manufacturer from receivership to a successful exit, and public company (TASE) governance.</p>
+          <h3 data-en="Commercial execution" data-he="מסחור וביצוע">Commercial execution</h3>
+          <p data-en="Turning a technology into qualified, defensible revenue: positioning, design-in and disciplined commercial management." data-he="הפיכת טכנולוגיה להכנסה מוסמכת ומוגנת: מיצוב, design-in וניהול מסחרי ממושמע.">Turning a technology into qualified, defensible revenue: positioning, design-in and disciplined commercial management.</p>
         </div>
         <div class="card">
           <div class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z" stroke="currentColor" stroke-width="1.6"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
           <h3 data-en="Engineering" data-he="הנדסה">Engineering</h3>
-          <p data-en="Hardware, NPI, SMT and reliability, from prototype to mass production, and global supply chains across Asia and the US (Marvell Semiconductor)." data-he="חומרה, NPI, SMT ואמינות, מאב-טיפוס לייצור המוני, ושרשראות אספקה גלובליות באסיה ובארה&quot;ב (Marvell Semiconductor).">Hardware, NPI, SMT and reliability, from prototype to mass production, and global supply chains across Asia and the US (Marvell Semiconductor).</p>
+          <p data-en="Hardware, NPI, SMT and reliability, from prototype to mass production, and global supply chains across Asia and the US ." data-he="חומרה, NPI, SMT ואמינות, מאב-טיפוס לייצור המוני, ושרשראות אספקה גלובליות באסיה ובארה&quot;ב .">Hardware, NPI, SMT and reliability, from prototype to mass production, and global supply chains across Asia and the US.</p>
         </div>
         <div class="card">
           <div class="ic"><svg viewBox="0 0 24 24" fill="none"><circle cx="5" cy="6" r="2.2" stroke="currentColor" stroke-width="1.5"/><circle cx="19" cy="6" r="2.2" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="18" r="2.2" stroke="currentColor" stroke-width="1.5"/><path d="M6.8 7.3l4 8.4M17.2 7.3l-4 8.4M7 6h10" stroke="currentColor" stroke-width="1.5"/></svg></div>
           <h3 data-en="Industry network" data-he="קשרים בתעשייה">Industry network</h3>
-          <p data-en="Direct relationships with Israel's defense primes and integrators, and board roles in the Manufacturers Association of Israel." data-he="קשרים ישירים עם יצרניות הביטחון והאינטגרטורים בישראל, ותפקידי דירקטוריון בהתאחדות התעשיינים.">Direct relationships with Israel's defense primes and integrators, and board roles in the Manufacturers Association of Israel.</p>
+          <p data-en="Direct relationships with Israel's defense primes and integrators, and the industrial and medical OEM community." data-he="קשרים ישירים עם יצרניות הביטחון והאינטגרטורים בישראל, ועם קהילת יצרני התעשייה והרפואה.">Direct relationships with Israel's defense primes and integrators, and the industrial and medical OEM community.</p>
         </div>
       </div>
       <p class="foundedby" data-en="Founded and led by Yaniv Hadar." data-he="נוסדה ומנוהלת על ידי יניב הדר.">Founded and led by Yaniv Hadar.</p>
@@ -564,15 +577,15 @@ footer{border-top:1px solid var(--line);padding-block:30px;color:var(--ink-3);fo
         </div>
         <div class="ladder-svg" aria-hidden="true">
           <svg viewBox="0 0 420 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="30" y="210" width="110" height="60" rx="8" fill="#132539" stroke="#243b57" stroke-width="1.4"/>
-            <rect x="155" y="140" width="110" height="130" rx="8" fill="#152a41" stroke="#2c476a" stroke-width="1.4"/>
-            <rect x="280" y="70" width="110" height="200" rx="8" fill="#18304a" stroke="#e8762a" stroke-width="1.6"/>
-            <rect x="30" y="210" width="110" height="5" rx="2.5" fill="#5b8fc7"/>
-            <rect x="155" y="140" width="110" height="5" rx="2.5" fill="#5b8fc7"/>
-            <rect x="280" y="70" width="110" height="5" rx="2.5" fill="#e8762a"/>
-            <text x="85" y="248" fill="#f2934f" font-family="Saira, sans-serif" font-weight="700" font-size="20" text-anchor="middle">01</text>
-            <text x="210" y="178" fill="#f2934f" font-family="Saira, sans-serif" font-weight="700" font-size="20" text-anchor="middle">02</text>
-            <text x="335" y="108" fill="#f2934f" font-family="Saira, sans-serif" font-weight="700" font-size="20" text-anchor="middle">03</text>
+            <rect x="30" y="210" width="110" height="60" rx="8" fill="#eaf2ff" stroke="#cdddf5" stroke-width="1.4"/>
+            <rect x="155" y="140" width="110" height="130" rx="8" fill="#e6fbfa" stroke="#b3ebe6" stroke-width="1.4"/>
+            <rect x="280" y="70" width="110" height="200" rx="8" fill="#fff2e6" stroke="#ffcfa3" stroke-width="1.6"/>
+            <rect x="30" y="210" width="110" height="5" rx="2.5" fill="#2563eb"/>
+            <rect x="155" y="140" width="110" height="5" rx="2.5" fill="#0891b2"/>
+            <rect x="280" y="70" width="110" height="5" rx="2.5" fill="#f27a2a"/>
+            <text x="85" y="248" fill="#2563eb" font-family="Saira, sans-serif" font-weight="700" font-size="20" text-anchor="middle">01</text>
+            <text x="210" y="178" fill="#0891b2" font-family="Saira, sans-serif" font-weight="700" font-size="20" text-anchor="middle">02</text>
+            <text x="335" y="108" fill="#d1600f" font-family="Saira, sans-serif" font-weight="700" font-size="20" text-anchor="middle">03</text>
             <path d="M40 60l40-30 30 20 40-30 30 20 40-30 30 20 40-30" stroke="#e8762a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.6" fill="none"/>
             <path d="M330 20h30v30" stroke="#e8762a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.6"/>
           </svg>
@@ -628,7 +641,7 @@ footer{border-top:1px solid var(--line);padding-block:30px;color:var(--ink-3);fo
 <script>
 (function(){
   var lang='en';
-  try{var s=localStorage.getItem('hadtech_lang');if(s==='he'||s==='en')lang=s;}catch(e){}
+  try{var s=localStorage.getItem('ht_lang2');if(s==='he'||s==='en')lang=s;}catch(e){}
   var btn=document.getElementById('langBtn');
   function apply(l){
     lang=l;
@@ -638,19 +651,19 @@ footer{border-top:1px solid var(--line);padding-block:30px;color:var(--ink-3);fo
       var v=(l==='he')?el.getAttribute('data-he'):el.getAttribute('data-en');
       if(v!=null)el.textContent=v;
     });
-    if(btn)btn.textContent=(l==='he')?'EN':'עברית';
-    try{localStorage.setItem('hadtech_lang',l);}catch(e){}
+    if(btn)btn.textContent=(l==='he')?'EN':'עב';
+    try{localStorage.setItem('ht_lang2',l);}catch(e){}
   }
   if(btn)btn.addEventListener('click',function(){apply(lang==='he'?'en':'he');});
-  if(lang==='he')apply('he');
+  apply(lang);
 
   var c=document.getElementById('net');if(!c)return;var ctx=c.getContext('2d');
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   var W,H,nodes,raf;
   function size(){var r=c.getBoundingClientRect();W=c.width=r.width*devicePixelRatio;H=c.height=r.height*devicePixelRatio;}
   function init(){size();var n=Math.min(52,Math.floor(W/(36*devicePixelRatio)));nodes=[];for(var i=0;i<n;i++){nodes.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.15*devicePixelRatio,vy:(Math.random()-.5)*.15*devicePixelRatio});}}
-  function draw(){ctx.clearRect(0,0,W,H);var md=130*devicePixelRatio;for(var i=0;i<nodes.length;i++){var a=nodes[i];a.x+=a.vx;a.y+=a.vy;if(a.x<0||a.x>W)a.vx*=-1;if(a.y<0||a.y>H)a.vy*=-1;for(var j=i+1;j<nodes.length;j++){var b=nodes[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.hypot(dx,dy);if(d<md){var o=(1-d/md)*.5;ctx.strokeStyle='rgba(91,143,199,'+o*.5+')';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}}ctx.fillStyle='rgba(232,118,42,.7)';ctx.beginPath();ctx.arc(a.x,a.y,1.5*devicePixelRatio,0,6.29);ctx.fill();}raf=requestAnimationFrame(draw);}
-  try{init();if(reduce){ctx.clearRect(0,0,W,H);for(var i=0;i<nodes.length;i++){var a=nodes[i];ctx.fillStyle='rgba(232,118,42,.6)';ctx.beginPath();ctx.arc(a.x,a.y,1.5*devicePixelRatio,0,6.29);ctx.fill();}}else{draw();}var to;window.addEventListener('resize',function(){clearTimeout(to);to=setTimeout(function(){cancelAnimationFrame(raf);init();if(!reduce)draw();},200);});}catch(e){}
+  function draw(){ctx.clearRect(0,0,W,H);var md=130*devicePixelRatio;for(var i=0;i<nodes.length;i++){var a=nodes[i];a.x+=a.vx;a.y+=a.vy;if(a.x<0||a.x>W)a.vx*=-1;if(a.y<0||a.y>H)a.vy*=-1;for(var j=i+1;j<nodes.length;j++){var b=nodes[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.hypot(dx,dy);if(d<md){var o=(1-d/md)*.5;ctx.strokeStyle='rgba(37,99,235,'+o*.55+')';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}}ctx.fillStyle='rgba(242,122,42,.8)';ctx.beginPath();ctx.arc(a.x,a.y,1.5*devicePixelRatio,0,6.29);ctx.fill();}raf=requestAnimationFrame(draw);}
+  try{init();if(reduce){ctx.clearRect(0,0,W,H);for(var i=0;i<nodes.length;i++){var a=nodes[i];ctx.fillStyle='rgba(242,122,42,.7)';ctx.beginPath();ctx.arc(a.x,a.y,1.5*devicePixelRatio,0,6.29);ctx.fill();}}else{draw();}var to;window.addEventListener('resize',function(){clearTimeout(to);to=setTimeout(function(){cancelAnimationFrame(raf);init();if(!reduce)draw();},200);});}catch(e){}
 })();
 </script>
 
